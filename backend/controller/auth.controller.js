@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
+
 export const signup = async (req, res) => {
   try {
     const { fullName, username, password, confirmPassword, gender } = req.body;
@@ -12,7 +13,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ error: "Username already exists" });
     }
     // HASH PASSWORD HERE
-    const salt = await bcryptjs.genSalt(10);
+    const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     //https://avatar-placeholder.iran.liara.run/
@@ -51,9 +52,8 @@ export const login = async (req, res) => {
   try {
     const { username, password } = req.body; //get inputs from user
     const user = await User.findOne({ username }); //check if user exists
-    const isPasswordCorrect = await becrypt.compare(
+    const isPasswordCorrect = await bcrypt.compare(
       password,
-      user.password,
       user?.password || ""
     ); // when non existential user is entered
     if (!user || !isPasswordCorrect) {
