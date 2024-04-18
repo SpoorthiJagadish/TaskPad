@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
+import NotesList from './components/NotesList.jsx';
+import {useState} from 'react';
+import {nanoid} from 'nanoid';
 function App() {
-  const [count, setCount] = useState(0)
+  const[notes,setNotes]=useState([
+    {
+    id: nanoid(),
+    text: "This is my first note!",
+    date: "18/04/2024"
+  },
+  {
+    id: nanoid(),
+    text: "This is my second note!",
+    date: "19/04/2024"
+  },
+  {
+    id: nanoid(),
+    text: "This is my third note!",
+    date: "21/04/2024"
+  },
+  {
+    id: nanoid(),
+    text: "This is my new note!",
+    date: "20/04/2024"
+  },
+ 
+]); 
 
+ const addNote= (text) => {
+ 
+  const date = new Date();
+  const newNote={
+    id: nanoid(),
+    text: text,
+    date: date.toLocaleDateString()
+    
+  }
+  const newNotes= [...notes,newNote]; //new array instead of update old array
+  setNotes(newNotes); //allows components to rerender
+ };
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className='container'>
+      <NotesList notes={notes} handleAddNote={addNote} />
+      
+    </div>
+  );
+};
 
-export default App
+export default App;
