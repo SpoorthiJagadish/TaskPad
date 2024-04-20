@@ -1,10 +1,13 @@
+import NoteList from "../../components/NoteList";
+import Search from "../../components/Search";
+
 function Home() {
   return (
-    <div className="flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding 
-    backdrop-filter backdrop-blur-lg bg-opacity-10">
-      <h1>Hi</h1>
+    <div className="max-w-screen-lg mx-auto px-4 min-h-screen background: url('../../assets/bg-blue-1.jpg')">
+      <Search />
+      <NoteList />
     </div>
   )
 }
 
-export default Home
+export default Home;

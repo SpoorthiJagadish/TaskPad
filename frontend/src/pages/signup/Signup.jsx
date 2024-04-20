@@ -28,8 +28,8 @@ const Signup = () => {
 
   return (
     <div className=" flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10">
-        <h1 className="text-3xl font-semibold text-center text-gray-300 mb-3">
+      <div className="w-full p-6 rounded-lg shadow-md bg-blue-700 bg-clip- bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10">
+        <h1 className="text-3xl font-semibold text-center text-white mb-3">
           Sign Up at
           <span className="text-blue-500"> TaskPad</span>
         </h1>
@@ -37,7 +37,7 @@ const Signup = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
-              <span className="text-base label-text">Full Name</span>
+              <span className="text-base label-text text-white">Full Name</span>
             </label>
             <input type='text' placeholder="Enter Full Name" className="w-full input input-bordered h-10" 
             value={inputs.fullName}
@@ -47,7 +47,7 @@ const Signup = () => {
 
           <div>
             <label className="label p-2">
-              <span className="text-base label-text">Username</span>
+              <span className="text-base label-text text-white">Username</span>
             </label>
             <input type="text" placeholder="Enter Username" className="w-full input input-bordered h-10"
             value={inputs.username}
@@ -67,7 +67,7 @@ const Signup = () => {
 
           <div>
             <label className="label">
-              <span className="text-base label-text">Confirm Password</span>
+              <span className="text-base label-text text-white">Confirm Password</span>
             </label>
             <input type="password" placeholder="Re-enter Password" className="w-full input input-bordered h-10" 
             value={inputs.confirm_password}
@@ -77,7 +77,7 @@ const Signup = () => {
 
           <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
 
-          <Link to="/login" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
+          <Link to="/login" className="text-sm hover:underline text-white hover:text-blue-600 mt-2 inline-block">
             Already have an account?
           </Link>
 
