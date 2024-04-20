@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { extractTime } from '../utils/extractTime.js';
 import Note from './Note.jsx';
 
 const NoteList = () => {
   const [notes, setNotes] = useState([]);
+  const [newNoteTitle, setNewNoteTitle] = useState('');
+  const [newNoteContent, setNewNoteContent] = useState('');
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -19,12 +22,59 @@ const NoteList = () => {
     fetchNotes();
   }, []);
 
+  const handleAddNote = async () => {
+    try {
+      const response = await axios.post('/api/taskpad/notes', {
+        title: newNoteTitle,
+        content: newNoteContent
+      });
+      setNotes([...notes, response.data]);
+      setNewNoteTitle('');
+      setNewNoteContent('');
+    } catch (error) {
+      console.error('Error adding note:', error);
+    }
+  };
+
+  const handleDeleteNote = async (noteId) => {
+    try {
+      await axios.delete(`/api/taskpad/notes/${noteId}`);
+      setNotes(notes.filter(note => note._id !== noteId));
+      // window.location.reload();
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
+  };
+
   return (
     <div className='grid grid-cols-auto-fill gap-4'>
       {notes.map(note => (
-        <Note title={note.title} content={note.content} key={note._id} />
+        <Note
+          key={note._id}
+          title={note.title}
+          content={note.content}
+          date={extractTime(note.updatedAt)}
+          handleDelNote={() => handleDeleteNote(note._id)}
+        />
       ))}
+
+      <div className='card-body bg-blue-200 rounded-lg p-4 min-h-44 flex flex-col justify-between whitespace-pre-wrap'>
+        <h2 className='card-title'>
+          <input className='focus:outline-none bg-inherit'
+            type="text" value={newNoteTitle} onChange={e => setNewNoteTitle(e.target.value)} placeholder="Enter note title"
+            />
+        </h2>
+
+        <p>
+          <textarea className='resize-none focus:outline-none bg-inherit'
+            value={newNoteContent} onChange={e => setNewNoteContent(e.target.value)}
+            placeholder="Enter note content"
+          />
+        </p>
+        <button className="btn btn-primary" onClick={handleAddNote}>Add Note</button>
+      </div>
     </div>
+    
   );
 };
 
