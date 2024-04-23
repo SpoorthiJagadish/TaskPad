@@ -18,25 +18,3 @@ const Note = ({title, content,  date, handleDelNote}) => {
 };
 
 export default Note;
-
-
-// // import { useAuthContext } from '../context/AuthContext';
-
-// const Note = () => {
-//   // const {authUser} = useAuthContext();
-//   // const myNote = note.noteId === authUser._id;
-//   return (
-//     <div className="card w-96 bg-white shadow-xl m-1">
-//       <div className="card-body">
-//         <h2 className="card-title text-cyan-950"></h2>
-//         <p className="text-cyan-800"></p>
-//         <div className="card-actions justify-end">
-//           <button className="btn btn-primary bg-sky-500 text-white">Save</button>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Note
-

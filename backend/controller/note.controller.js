@@ -126,10 +126,9 @@ export const del = (req, res) => {
 };
 
 // Find a single note with a title
-// Find a single note with a title
 export const findOneByTitle = (req, res) => {
   // const title = req.query.title; // Extract title from query parameters
-  const title = req.params.title
+  const title = req.params.title;
   // If title is not provided, return a bad request response
   if (!title) {
     return res.status(400).send({
@@ -137,7 +136,7 @@ export const findOneByTitle = (req, res) => {
     });
   }
 
-  Note.findOne({ title: { $regex: title, $options: 'i' } }) // Case-insensitive regex search for title
+  Note.findOne({ title: { $regex: title, $options: "i" } }) // Case-insensitive regex search for title
     .then((note) => {
       if (!note) {
         return res.status(404).send({
@@ -152,4 +151,3 @@ export const findOneByTitle = (req, res) => {
       });
     });
 };
-

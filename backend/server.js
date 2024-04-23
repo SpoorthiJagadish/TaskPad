@@ -16,11 +16,6 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/taskpad", noteRoutes);
 
-//app.get("/", (req, res) => {
-// root route http://localhost:5000/
-// res.send("Hello World");
-//});
-
 app.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server Running on port ${PORT}`);
