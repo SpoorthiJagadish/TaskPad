@@ -5,6 +5,7 @@ import {
   findAll,
   findOne,
   update,
+  findOneByTitle,
 } from "../controller/note.controller.js";
 
 const router = express.Router();
@@ -24,4 +25,6 @@ router.put("/notes/:noteId", update);
 // Delete a Note with noteId
 router.delete("/notes/:noteId", del);
 
+// SEach a Note with title
+router.get("/notes/search/:title", findOneByTitle);
 export default router;
